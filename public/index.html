@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <title>3 Databases in approx. 3 minutes</title>
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <textarea id="source">
+class: front-page
+
+# 3 Databases in (approx.) 33 minutes
+
+## En kjapp innføring i NoSQL
+
+Date-IT 6/11 - 2013
+
+Andreas Heim
+BEKK Consulting
+---
+class: middle center
+<h1><span>Spørsmål: Hva er NoSQL?</span></h1>
+---
+class: white middle center
+#Svar
+## alt som ikke er en relasjonsdatabase
+---
+class: cols three
+
+<h1><span>Agenda</span></h1>
+
+<div class="col">
+.circle.yellow.centered[Redis]
+<h1><span>Key-value</span></h1>
+
+* low-level api
+* data structure server
+* in-memory
+
+</div>
+
+<div class="col">
+.circle.green.centered[MongoDB]
+<h1><span>Dokumentdatabase</span></h1>
+
+* ingen relasjoner
+* embedded documents
+* skalerer meget godt horisontalt
+
+</div>
+<div class="col">
+.circle.lightbrown.centered[neo4j]
+<h1><span>Grafdatabase</span></h1>
+
+* optimalisert for sammenkoblede data
+* eks. hvem følger hvem på twitter
+
+</div>
+
+---
+name: terminal
+# Terminal
+
+<p id="title"></p>
+
+<div id="container"></div>
+
+<div style="clear: both"></div>
+
+<ul id="list"></ul>
+
+<p>
+  <a href="#" id="resume">Resume</a> navigation
+</p>
+
+
+---
+
+# Resources
+
+- [https://github.com/chjj/term.js](https://github.com/chjj/term.js)
+    </textarea>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/term.js"></script>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> 
+
+    <script type="text/javascript">
+      var slideshow = remark.create({highlightStyle: "solarized"});
+
+      slideshow.on('showSlide', function(slide) {
+        if(slide.properties.name == "terminal") {
+          slideshow.pause();
+        }
+      });
+      document.getElementById('resume').onclick = function (e) {
+        slideshow.resume();
+        e.preventDefault();
+      };
+
+      var processed = [];
+
+
+
+      window.onload = function() {
+        var socket = io.connect();
+        socket.on('connect', function() {
+          var term = new Terminal({
+            cols: 80,
+            rows: 20,
+            useStyle: true,
+            screenKeys: true
+          });
+
+          term.on('data', function(data) {
+            socket.emit('terminal', data);
+          });
+
+          term.on('title', function(title) {
+            document.getElementById('title').innerText = title;
+          });
+
+          term.open(document.getElementById('container'));
+
+          term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
+
+          socket.on('terminal', function(data) {
+            term.write(data);
+          });
+
+
+
+          socket.on('disconnect', function() {
+            term.destroy();
+          });
+        });
+
+        socket.on('redis', function(data) {
+          $("#list").append('<li>' + data + '</li>');
+        });
+      };
+    </script>
+    <link rel="stylesheet/less" type="text/css" href="lib/bekk.less" />
+    <script src="lib/less.js" type="text/javascript"></script>
+  </body>
+</html>
