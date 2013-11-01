@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>3 Databases in approx. 3 minutes</title>
+    <title>3 Databases in approx. 33 minutes</title>
     <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
   </head>
   <body>
@@ -12,18 +12,71 @@ class: front-page
 
 ## En kjapp innføring i NoSQL
 
-Date-IT 6/11 - 2013
+Date-IT, Chalmers 6/11 - 2013
 
 Andreas Heim
 BEKK Consulting
+---
+class: middle center
+<iframe class="centered" width="560" height="315" src="//www.youtube.com/embed/FcLHlZeLzUk" frameborder="0" allowfullscreen></iframe>
+
+---
+class: middle center
+# Not only SQL
+???
+- Begrepet ble først brukt av Carlo Strozzi i 1998.
+- Han hadde en Open Source Relasjonsdatabase som ikke eksponerte et standard SQL-interface.
+- Han har senere foreslått at det burde hete NoREL siden de fleste NoSQL-databaser går bort fra den relasjonelle modellen
+- Begrepet ble reintrodusert i 2009 av Eric Evans for å forsøke å kategorisere en voksende mengde ikke-relasjonelle distribuerte
+datastores.
 ---
 class: middle center
 <h1><span>Spørsmål: Hva er NoSQL?</span></h1>
 ---
 class: white middle center
 #Svar
-## alt som ikke er en relasjonsdatabase
+## *.lightbrown[ALT SOM IKKE ER EN TRADISJONELL RELASJONSDATABASE]*
 ---
+class: middle center
+#ACID
+???
+- Eller... La oss ta litt teori.
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+- En tradisjonell relasjonsdatabase oppfyller typisk kravene til ACID, imens en typisk NoSQL-database gjerne bytter en eller flere av egenskapene mot ytelse eller skalerbarhet.
+- Jeg skal prøve å forklare litt om disse forskjellige egenskapene, men kommer til å stokke litt om på rekkefølgen.
+---
+class: middle 
+
+.circle.centered.red[ATOMICITY]
+
+???
+- Atomicity er en av egenskapene ved transaksjoner.
+- I en serie av databaseoperasjoner så må enten *alle* skje, eller *ingenting* skjer.
+- En database som garanterer atomicity vil *motvirke* at en oppdatering til databasen kun vil gjennomføres delvis.
+- Atomicity i denne forstanden kan defineres som at oppdateringen ikke kan verken deles eller forenkles.
+---
+class: middle 
+
+.circle.centered.yellow[CONSISTENCY]
+
+???
+- I et databasesystem så vil *Consistency* sørge for at en transaksjon vil ta databasen fra èn gyldig tilstand, til en annen gyldig tilstand.
+---
+class: middle
+.circle.centered.green[ISOLATION]
+???
+- Egenskapen *isolation* sørger for at alle transaksjoner skjer isolert og på samme måte som om de skulle vært kjørt i parallel.
+- Eksempel: Et eller annet eksempel.
+---
+class: middle
+
+.circle.centered.lightbrown[DURABILITY]
+
+???
+----
 class: cols three
 
 <h1><span>Agenda</span></h1>
@@ -74,10 +127,33 @@ name: terminal
 
 
 ---
+class: center pushed
 
-# Resources
 
-- [https://github.com/chjj/term.js](https://github.com/chjj/term.js)
+![ux](img/ux.png)
+
+### *.lightbrown[CAFE BULTEN]*
+## I KVELD KL. 17.00
+### *.lightbrown[uxcup.bekk.no]*
+
+???
+
+UX Cup er en interaksjonsdesign konkurranse for 3.-5. klassinger som vi arrangerer for 7 skoler i 3 byer. Vinnerlaget blir med BEKK til Lisboa på UXLx konferansen. Chalmers har vunnet de siste 2 årene, klarer de å forsvare seieren?
+
+---
+class: pushed
+<span class="img">
+![](img/resepsjon.png)
+</span>
+
+
+<h1><span>Sommerjobb i BEKK</span></h1>
+
+.circle.yellow.top-right[Søknadsfrist 8. november]
+
+##Send søknad med CV og karakterer (betyg) til jobb@bekk.no.
+
+*.lightbrown[P.S. Vi skjønner svensk]*
     </textarea>
 
     <script src="/socket.io/socket.io.js"></script>
