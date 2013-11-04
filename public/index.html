@@ -23,18 +23,17 @@ class: middle center
 ---
 # <span>Agenda</span>
 
-## Teori
-* CAP
+## Databaseteori for distribuerte systemer
 * ACID
+* BASE
+* CAP
 
-## Praksis
+## Praksis (yeah)
 * Redis
 * MongoDB
 * Neo4J
 
 ---
-
-
 class: middle center
 # Not only SQL
 ???
@@ -93,6 +92,125 @@ class: middle
 - Durability, eller holdbarhet på norsk sørger for at dataene blir tatt vare på selv om systemet kræsjer. Typisk in-memory databaser har lav durablity, imens clustrede installasjoner har høy durability.
 - Sammenhenger også mye med hardware og operativsystem.
 ---
+class: middle center
+
+<h1><span>BASE</span></h1>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+</div>
+
+<div class="col">
+  &nbsp;
+</div>
+
+<div class="col">
+  &nbsp;
+</div>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+</div>
+
+<div class="col">
+  .circle.centered.red[S]
+  # <span>Soft state</span>
+</div>
+
+<div class="col">
+  &nbsp;
+</div>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+</div>
+
+<div class="col">
+  .circle.centered.red[S]
+  # <span>Soft state</span>
+</div>
+
+<div class="col">
+  .circle.centered.yellow[E]
+  # <span>Eventually consistent</span>
+</div>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+  - garanterer tilgjengelighet (availability)
+</div>
+
+<div class="col">
+  .circle.centered.red[S]
+  # <span>Soft state</span>
+</div>
+
+<div class="col">
+  .circle.centered.yellow[E]
+  # <span>Eventually consistent</span>
+</div>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+  - garanterer tilgjengelighet (availability)
+</div>
+
+<div class="col">
+  .circle.centered.red[S]
+  # <span>Soft state</span>
+  - tilstand kan forandres over tid
+  - til og med uten input til systemet
+</div>
+
+<div class="col">
+  .circle.centered.yellow[E]
+  # <span>Eventually consistent</span>
+</div>
+---
+class: cols three
+<h1><span>BASE</span></h1>
+
+<div class="col">
+  .circle.centered.green[BA]
+  # <span>Basically Available</span>
+  - garanterer tilgjengelighet (availability)
+</div>
+
+<div class="col">
+  .circle.centered.red[S]
+  # <span>Soft state</span>
+  - tilstand kan forandres over tid
+  - til og med uten input til systemet
+</div>
+
+<div class="col">
+  .circle.centered.yellow[E]
+  # <span>Eventually consistent</span>
+  - systemet blir konsistent etter hvert
+</div>
+???
+- Eksempel, skrive til en del av cluster, lese fra en annen
+---
 class: white middle center
 
 # CAP THEOREM
@@ -135,24 +253,214 @@ class: cols three
 <div class="col">
 .circle.green.centered[CP]
 <h1><span>Enforced consistency</span></h1>
-- ACID
-- enforced consistency
-- ofrer availability
 </div>
 <div class="col">
-.circle.green.centered[AP]
-<h1><span>Eventual consistency</span></h1>
-- BASE
-- Kan i perioder ha inkonsistens mellom noder
+  &nbsp;
 </div>
 <div class="col">
-.circle.green.centered[CA]
-<h1><span>Uskalerbart</span></h1>
-- Urealistisk.
+  &nbsp;
+</div>
+---
+class: cols three
+<h1><span>Velg to</span></h1>
+
+<div class="col">
+  .circle.green.centered[CP]
+  <h1><span>Enforced consistency</span></h1>
+
+  - alltid konsistent
+  - ACID-databaser *må* velge dette.
+</div>
+<div class="col">
+  &nbsp;
+</div>
+<div class="col">
+  &nbsp;
 </div>
 ---
 class: cols three
 
+<h1><span>Velg to</span></h1>
+
+<div class="col">
+  .circle.green.centered[CP]
+  <h1><span>Enforced consistency</span></h1>
+
+  - alltid konsistent
+  - ACID-databaser *må* velge dette.
+</div>
+
+<div class="col">
+  .circle.red.centered[AP]
+  <h1><span>Eventual consistency</span></h1>
+</div>
+
+<div class="col">
+  &nbsp;
+</div>
+---
+class: cols three
+
+<h1><span>Velg to</span></h1>
+
+<div class="col">
+  .circle.green.centered[CP]
+  <h1><span>Enforced consistency</span></h1>
+
+  - alltid konsistent
+  - ACID-databaser *må* velge dette.
+</div>
+
+<div class="col">
+  .circle.red.centered[AP]
+  <h1><span>Eventual consistency</span></h1>
+
+  - tilgjengelig over konsistent
+  - typisk for BASE
+</div>
+
+<div class="col">
+  &nbsp;
+</div>
+---
+class: cols three
+
+<h1><span>Velg to</span></h1>
+
+<div class="col">
+  .circle.green.centered[CP]
+  <h1><span>Enforced consistency</span></h1>
+
+  - alltid konsistent
+  - ACID-databaser *må* velge dette.
+</div>
+
+<div class="col">
+  .circle.red.centered[AP]
+  <h1><span>Eventual consistency</span></h1>
+
+  - tilgjengelig over konsistent
+  - typisk for BASE
+</div>
+
+<div class="col">
+  .circle.yellow.centered[CA]
+  <h1><span>Consistently available</span></h1>
+</div>
+---
+class: cols three
+
+<h1><span>Velg to</span></h1>
+
+<div class="col">
+  .circle.green.centered[CP]
+  <h1><span>Enforced consistency</span></h1>
+
+  - alltid konsistent
+  - ACID-databaser *må* velge dette.
+</div>
+
+<div class="col">
+  .circle.red.centered[AP]
+  <h1><span>Eventual consistency</span></h1>
+
+  - tilgjengelig over konsistent
+  - typisk for BASE
+</div>
+
+<div class="col">
+  .circle.yellow.centered[CA]
+  <h1><span>Consistently available</span></h1>
+
+  - alltid tilgjengelig?
+  - alltid konsistent?
+</div>
+---
+class: round
+<span class="img">
+![](img/think.png)
+</span>
+???
+
+Hvis vi har et distribuert system:
+- klienter skriver til forskjellige deler av clusteret
+- clusteret blir partisjonert pga en nettverksfeil
+- klientene fortsetter å skrive til hver sin del
+- hvordan sammenstiller man data??
+- git merge?
+- hva med konflikter?
+---
+
+class: cols two
+
+# <span>Velg èn</span>
+
+<div class="col">
+  .circle.red.centered[CONSISTENCY]
+  # <span>Mer konsistent</span>
+</div>
+
+<div class="col">
+  .circle.green.centered[AVAILABILITY]
+  # <span>Mer tilgjengelig</span>
+</div>
+???
+
+- Vi må velge enten mer konsistens eller mer tilgjengelighet
+- Det går ikke å ha maksimalt med tilgjengelighet eller konistens!
+---
+class: cols two
+
+# <span>Velg èn</span>
+
+<div class="col">
+  .circle.red.centered[CONSISTENCY]
+  # <span>Mer konsistent</span>
+
+  - Transaksjon ikke godkjent før alle noder har mottatt data
+  - Alle noder får samme data
+</div>
+
+<div class="col">
+  .circle.green.centered[AVAILABILITY]
+  # <span>Mer tilgjengelig</span>
+</div>
+
+---
+class: cols two
+
+# <span>Velg èn</span>
+
+<div class="col">
+  .circle.red.centered[CONSISTENCY]
+  # <span>Mer konsistent</span>
+
+  - Transaksjon ikke godkjent før alle noder har mottatt data
+  - Alle noder får samme data
+</div>
+
+<div class="col">
+  .circle.green.centered[AVAILABILITY]
+  # <span>Mer tilgjengelig</span>
+
+  - Synkronisering mellom noder
+  - To klienter kan få forskjellige data samtidig
+</div>
+???
+
+- 100% konsistente data krever total stopp ved nettverksbrudd
+- 100% oppetid (availability) fører med seg inkonsistens!
+- Men, det finnes grader av begge egenskaper.
+- F.eks. hvor kommer latency inn, hvor lenge er systemene partisjonert?
+
+---
+class: pushed
+<span class="img">
+![](img/hands.png)
+</span>
+
+---
+class: cols three
 <h1><span>Praksis</span></h1>
 
 <div class="col">
@@ -160,28 +468,72 @@ class: cols three
 <h1><span>Key-value</span></h1>
 
 * low-level api
+--
+
 * data structure server
+--
+
 * in-memory
+--
+
+* eventually consistent
+--
+
+* Relaxed consistency
+--
 
 </div>
-
 <div class="col">
 .circle.green.centered[MongoDB]
 <h1><span>Dokumentdatabase</span></h1>
+--
 
 * ingen relasjoner
-* embedded documents
-* skalerer meget godt horisontalt
+--
 
+* embedded documents
+--
+
+* skalerer meget godt horisontalt
+--
+
+* ikke ACID p.g.a. ingen transaksjoner på tvers av dokumenter
+--
+
+* eventually consistent 
+--
+
+* write concerns
+--
+
+* Strong consistency ved single-master-system
+--
+
+* Reading from secondaries -> relaxed consistency
+--
 </div>
 <div class="col">
 .circle.lightbrown.centered[neo4j]
 <h1><span>Grafdatabase</span></h1>
+--
+
+* ACID
+--
 
 * optimalisert for sammenkoblede data
-* eks. hvem følger hvem på twitter
+--
 
+* eks. hvem følger hvem på twitter
+--
+
+* Consistent, Available, men *ikke* distribuert
 </div>
+???
+
+Redis: Relaxed consistency, mulig å konfigurere at den ikke tar imot writes med mindre N-slaver er koblet til.
+
+MongoDB: Replication. 
+
 
 ---
 name: terminal
@@ -234,63 +586,9 @@ class: pushed
     <script src="/term.js"></script>
     <script src="http://gnab.github.io/remark/downloads/remark-0.5.9.min.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> 
-
-    <script type="text/javascript">
-      var slideshow = remark.create({highlightStyle: "solarized"});
-
-      slideshow.on('showSlide', function(slide) {
-        if(slide.properties.name == "terminal") {
-          slideshow.pause();
-        }
-      });
-      document.getElementById('resume').onclick = function (e) {
-        slideshow.resume();
-        e.preventDefault();
-      };
-
-      var processed = [];
-
-
-
-      window.onload = function() {
-        var socket = io.connect();
-        socket.on('connect', function() {
-          var term = new Terminal({
-            cols: 80,
-            rows: 20,
-            useStyle: true,
-            screenKeys: true
-          });
-
-          term.on('data', function(data) {
-            socket.emit('terminal', data);
-          });
-
-          term.on('title', function(title) {
-            document.getElementById('title').innerText = title;
-          });
-
-          term.open(document.getElementById('container'));
-
-          term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
-
-          socket.on('terminal', function(data) {
-            term.write(data);
-          });
-
-
-
-          socket.on('disconnect', function() {
-            term.destroy();
-          });
-        });
-
-        socket.on('redis', function(data) {
-          $("#list").append('<li>' + data + '</li>');
-        });
-      };
-    </script>
+    
     <link rel="stylesheet/less" type="text/css" href="lib/bekk.less" />
     <script src="lib/less.js" type="text/javascript"></script>
+    <script src="lib/pres.js" type="text/javascript"></script>
   </body>
 </html>
