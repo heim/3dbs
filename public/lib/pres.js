@@ -27,18 +27,20 @@ window.onload = function() {
     });
 
     term.on('data', function(data) {
-      socket.emit('terminal', data);
+      socket.emit('redis-term', data);
     });
 
-    term.on('title', function(title) {
-      document.getElementById('title').innerText = title;
-    });
+    document.getElementById('ls').onclick = function (e) {
+      term.write('ls\n');
+      socket.emit('redis-term', 'ls\n');
+      e.preventDefault();
+    };
 
-    term.open(document.getElementById('container'));
+    term.open(document.getElementById('redis-term'));
 
     term.write('\x1b[31mWelcome to term.js!\x1b[m\r\n');
 
-      socket.on('terminal', function(data) {
+      socket.on('redis-term', function(data) {
         term.write(data);
       });
 

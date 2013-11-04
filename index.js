@@ -27,9 +27,10 @@ process.title = 'term.js';
 
 var buff = []
   , socket
-  , term;
+  , redis_term;
 
-term = pty.fork(process.env.SHELL || 'sh', [], {
+//term = pty.fork(process.env.SHELL || 'sh', [], {
+redis_term = pty.fork("redis-cli" || 'sh', [], {
   name: require('fs').existsSync('/usr/share/terminfo/x/xterm-256color')
     ? 'xterm-256color'
     : 'xterm',
@@ -38,17 +39,17 @@ term = pty.fork(process.env.SHELL || 'sh', [], {
   cwd: process.env.HOME
 });
 
-term.on('data', function(data) {
+redis_term.on('data', function(data) {
 
   return !socket
     ? buff.push(data)
-    : socket.emit('terminal', data);
+    : socket.emit('redis-term', data);
 });
 
 console.log(''
   + 'Created shell with pty master/slave'
   + ' pair (master: %d, pid: %d)',
-  term.fd, term.pid);
+  redis_term.fd, redis_term.pid);
 
 /**
  * App & Server
@@ -105,8 +106,8 @@ io = io.listen(server, {
 
 io.sockets.on('connection', function(sock) {
   socket = sock;
-  socket.on('terminal', function(data) {
-    term.write(data);
+  socket.on('redis-term', function(data) {
+    redis_term.write(data);
   });
 
   redisClient.subscribe('realtime');
@@ -126,8 +127,6 @@ io.sockets.on('connection', function(sock) {
   });
 
   while (buff.length) {
-    socket.emit('terminal', buff.shift());
+    socket.emit('redis-term', buff.shift());
   }
-
-
 });
