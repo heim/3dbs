@@ -21,6 +21,20 @@ class: middle center
 <iframe class="centered" width="560" height="315" src="//www.youtube.com/embed/FcLHlZeLzUk" frameborder="0" allowfullscreen></iframe>
 
 ---
+# <span>Agenda</span>
+
+## Teori
+* CAP
+* ACID
+
+## Praksis
+* Redis
+* MongoDB
+* Neo4J
+
+---
+
+
 class: middle center
 # Not only SQL
 ???
@@ -36,17 +50,16 @@ class: middle center
 class: white middle center
 #Svar
 ## *.lightbrown[ALT SOM IKKE ER EN TRADISJONELL RELASJONSDATABASE]*
+???
+- Eller... La oss ta litt teori.
 ---
 class: middle center
 #ACID
 ???
-- Eller... La oss ta litt teori.
 - Atomicity
 - Consistency
 - Isolation
 - Durability
-- En tradisjonell relasjonsdatabase oppfyller typisk kravene til ACID, imens en typisk NoSQL-database gjerne bytter en eller flere av egenskapene mot ytelse eller skalerbarhet.
-- Jeg skal prøve å forklare litt om disse forskjellige egenskapene, men kommer til å stokke litt om på rekkefølgen.
 ---
 class: middle 
 
@@ -76,10 +89,71 @@ class: middle
 .circle.centered.lightbrown[DURABILITY]
 
 ???
-----
+
+- Durability, eller holdbarhet på norsk sørger for at dataene blir tatt vare på selv om systemet kræsjer. Typisk in-memory databaser har lav durablity, imens clustrede installasjoner har høy durability.
+- Sammenhenger også mye med hardware og operativsystem.
+---
+class: white middle center
+
+# CAP THEOREM
+
+???
+- Consistency (ACID)
+- Availability (redundans)
+- Partition tolerance (skalering)
+
+---
+class: white middle
+
+.circle.centered.red[CONSISTENCY]
+???
+- Alle noder ser de samme dataene hele tiden.
+- Hvis man skriver til en node og leser fra en annen rett etterpå, er dataene konsistente med en gang?
+- Eventual consistency er noe man snakker mye om i NoSQL-sammenheng. Dataene vil bli spredt til alle noder "etterhvert".
+---
+class: white middle
+.circle.centered.green[AVAILABILITY]
+???
+- Hva skjer hvis en node i clusteret går ned? Kan man fortsatt lese fra clusteret?
+---
+class: cols three middle
+<div class="col">
+  .circle.lightbrown.centered[PARTITION]
+</div>
+<div class="col">
+  &nbsp;
+</div>
+<div class="col">
+  .circle.yellow.centered[TOLERANCE]
+</div>
+???
+- Hva skjer når to noder i clusteret ikke kan snakke sammen lenger?
+- (Nettverksbrudd)
+---
+class: cols three
+<h1><span>Velg to</span></h1>
+<div class="col">
+.circle.green.centered[CP]
+<h1><span>Enforced consistency</span></h1>
+- ACID
+- enforced consistency
+- ofrer availability
+</div>
+<div class="col">
+.circle.green.centered[AP]
+<h1><span>Eventual consistency</span></h1>
+- BASE
+- Kan i perioder ha inkonsistens mellom noder
+</div>
+<div class="col">
+.circle.green.centered[CA]
+<h1><span>Uskalerbart</span></h1>
+- Urealistisk.
+</div>
+---
 class: cols three
 
-<h1><span>Agenda</span></h1>
+<h1><span>Praksis</span></h1>
 
 <div class="col">
 .circle.yellow.centered[Redis]
