@@ -17,6 +17,15 @@ var processed = [];
 
 window.onload = function() {
   var socket = io.connect();
+  
+  $('.redis-cmd').click(function (e) {
+    var command = $(e.target).text();
+    console.log(command);
+    //redis_term.write(command);
+    socket.emit('redis-term', command + "\r");
+    e.preventDefault();
+  });
+
   socket.on('connect', function() {
     var redis_term = new Terminal({
       cols: 80,
@@ -29,13 +38,6 @@ window.onload = function() {
       socket.emit('redis-term', data);
     });
 
-    $('.redis-cmd').click(function (e) {
-      var command = $(e.target).data('command');
-      console.log(command);
-      redis_term.write(command);
-      socket.emit('redis-term', command);
-      e.preventDefault();
-    });
 
     redis_term.open(document.getElementById('redis-term'));
 
