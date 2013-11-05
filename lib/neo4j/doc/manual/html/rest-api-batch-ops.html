@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>25.16. Batch operations</title><link rel="stylesheet" type="text/css" href="docbook-xsl.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.76.1" /><link rel="home" href="index.html" title="The Neo4j Manual v2.0.0-M06" /><link rel="up" href="rest-api.html" title="Chapter 25. REST API" /><link rel="prev" href="rest-api-graph-algos.html" title="25.15. Graph Algorithms" /><link rel="next" href="rest-api-indexes.html" title="25.17. Legacy indexing" /><link rel="preface" href="preface.html" title="Preface" /><link rel="part" href="introduction.html" title="Part I. Introduction" /><link rel="chapter" href="introduction-highlights.html" title="Chapter 1. Neo4j Highlights" /><link rel="chapter" href="graphdb-concepts.html" title="Chapter 2. Graph Database Concepts" /><link rel="chapter" href="graphdb-neo4j.html" title="Chapter 3. The Neo4j Graph Database" /><link rel="part" href="tutorials.html" title="Part II. Tutorials" /><link rel="chapter" href="tutorials-cypher.html" title="Chapter 4. Getting started with Cypher" /><link rel="chapter" href="tutorials-java-embedded.html" title="Chapter 5. Using Neo4j embedded in Java applications" /><link rel="chapter" href="tutorials-rest.html" title="Chapter 6. Neo4j Remote Client Libraries" /><link rel="chapter" href="tutorial-traversal.html" title="Chapter 7. The Traversal Framework" /><link rel="chapter" href="data-modeling-examples.html" title="Chapter 8. Data Modeling Examples" /><link rel="chapter" href="languages.html" title="Chapter 9. Languages" /><link rel="chapter" href="server-extending.html" title="Chapter 10. Extending the Neo4j Server" /><link rel="part" href="cypher-query-lang.html" title="Part III. Cypher Query Language" /><link rel="chapter" href="cypher-intro.html" title="Chapter 11. Introduction" /><link rel="chapter" href="query-syntax.html" title="Chapter 12. Syntax" /><link rel="chapter" href="query-general.html" title="Chapter 13. General Clauses" /><link rel="chapter" href="query-read.html" title="Chapter 14. Reading Clauses" /><link rel="chapter" href="query-write.html" title="Chapter 15. Writing Clauses" /><link rel="chapter" href="query-function.html" title="Chapter 16. Functions" /><link rel="chapter" href="cypher-schema.html" title="Chapter 17. Schema" /><link rel="chapter" href="examples-from-sql-to-cypher.html" title="Chapter 18. From SQL to Cypher" /><link rel="part" href="reference-documentation.html" title="Part IV. Reference" /><link rel="chapter" href="capabilities.html" title="Chapter 19. Capabilities" /><link rel="chapter" href="transactions.html" title="Chapter 20. Transaction Management" /><link rel="chapter" href="import.html" title="Chapter 21. Data Import" /><link rel="chapter" href="indexing.html" title="Chapter 22. Legacy Indexing" /><link rel="chapter" href="graph-algo.html" title="Chapter 23. Graph Algorithms" /><link rel="chapter" href="server.html" title="Chapter 24. Neo4j Server" /><link rel="chapter" href="rest-api.html" title="Chapter 25. REST API" /><link rel="chapter" href="deprecations.html" title="Chapter 26. Deprecations" /><link rel="part" href="operations.html" title="Part V. Operations" /><link rel="chapter" href="deployment.html" title="Chapter 27. Installation &amp; Deployment" /><link rel="chapter" href="embedded-configuration.html" title="Chapter 28. Configuration &amp; Performance" /><link rel="chapter" href="ha.html" title="Chapter 29. High Availability" /><link rel="chapter" href="operations-backup.html" title="Chapter 30. Backup" /><link rel="chapter" href="operations-security.html" title="Chapter 31. Security" /><link rel="chapter" href="operations-monitoring.html" title="Chapter 32. Monitoring" /><link rel="part" href="tools.html" title="Part VI. Tools" /><link rel="chapter" href="tools-webadmin.html" title="Chapter 33. Web Interface" /><link rel="chapter" href="shell.html" title="Chapter 34. Neo4j Shell" /><link rel="part" href="community.html" title="Part VII. Community" /><link rel="chapter" href="community-support.html" title="Chapter 35. Community Support" /><link rel="chapter" href="community-contributing.html" title="Chapter 36. Contributing to Neo4j" /><link rel="appendix" href="manpages.html" title="Appendix A. Manpages" /><link rel="refentry" href="re01.html" title="neo4j" /><link rel="refentry" href="re02.html" title="neo4j-shell" /><link rel="refentry" href="re03.html" title="neo4j-backup" /><link rel="refentry" href="re04.html" title="neo4j-arbiter" /><link rel="subsection" href="rest-api-batch-ops.html#rest-api-execute-multiple-operations-in-batch" title="25.16.1. Execute multiple operations in batch" /><link rel="subsection" href="rest-api-batch-ops.html#rest-api-refer-to-items-created-earlier-in-the-same-batch-job" title="25.16.2. Refer to items created earlier in the same batch job" /><link rel="subsection" href="rest-api-batch-ops.html#rest-api-execute-multiple-operations-in-batch-streaming" title="25.16.3. Execute multiple operations in batch streaming" /><link rel="copyright" href="ln-idp1064128.html" title="License: Creative Commons 3.0" />
+
+
+<!-- favicon -->
+
+<link rel="shortcut icon" href="http://neo4j.org/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="icon" href="http://neo4j.org/favicon.ico" type="image/x-icon" />
+
+<!-- style -->
+
+<link href="css/shCore.css" rel="stylesheet" type="text/css" />
+<link href="css/shCoreEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/shThemeEclipse.css" rel="stylesheet" type="text/css" />
+<link href="css/neo.css" rel="stylesheet" type="text/css" />
+
+<!-- Syntax Highlighter -->
+
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/shBrushBash.js"></script>
+<script type="text/javascript" src="js/shBrushPlain.js"></script>
+<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="js/shBrushGroovy.js"></script>
+<script type="text/javascript" src="js/shBrushCypher.js"></script>
+<script type="text/javascript" src="js/shBrushScala.js"></script>
+<script type="text/javascript" src="js/shBrushSql.js"></script>
+<script type="text/javascript" src="js/shBrushPython.js"></script>
+<script type="text/javascript" src="js/shBrushProperties.js"></script>
+
+<!-- activate when needed
+<script type="text/javascript" src="js/shBrushRuby.js"></script>
+<script type="text/javascript" src="js/shBrushCSharp.js"></script>
+-->
+ 
+<script type="text/javascript">
+  SyntaxHighlighter.defaults['tab-size'] = 4;
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all()
+</script>
+
+<!-- JQuery -->
+
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+
+<!-- Replace SVG for browsers that lack support. -->
+<script type="text/javascript" src="js/svgreplacer.js"></script>
+
+<!-- Image Scaler -->
+
+<script type="text/javascript" src="js/imagescaler.js"></script>
+
+<!-- Table Styler -->
+
+<script type="text/javascript" src="js/tablestyler.js"></script>
+
+<!-- Version -->
+
+<script type="text/javascript" src="js/version.js"></script>
+
+<!-- Offline Sidebar -->
+
+<script type="text/javascript" src="js/sidebar.js"></script>
+
+
+<div xmlns="" class="breadcrumbs"><span class="breadcrumb-link"><a href="index.html">The Neo4j Manual</a></span> &gt; <span class="breadcrumb-link"><a href="reference-documentation.html">Reference</a></span> &gt; <span class="breadcrumb-link"><a href="rest-api.html">REST API</a></span> &gt; <span class="breadcrumb-node">Batch operations</span></div></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="rest-api-graph-algos.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="rest-api-indexes.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="rest-api-batch-ops"></a>25.16. Batch operations</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="rest-api-batch-ops.html#rest-api-execute-multiple-operations-in-batch">25.16.1. Execute multiple operations in batch</a></span></dt><dt><span class="section"><a href="rest-api-batch-ops.html#rest-api-refer-to-items-created-earlier-in-the-same-batch-job">25.16.2. Refer to items created earlier in the same batch job</a></span></dt><dt><span class="section"><a href="rest-api-batch-ops.html#rest-api-execute-multiple-operations-in-batch-streaming">25.16.3. Execute multiple operations in batch streaming</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-execute-multiple-operations-in-batch"></a>25.16.1. Execute multiple operations in batch</h3></div></div></div><p>This lets you execute multiple API calls through a single HTTP call,
+significantly improving performance for large insert and update
+operations.</p><p>The batch service expects an array of job descriptions as input, each job
+description describing an action to be performed via the normal server
+API.</p><p>This service is transactional. If any of the operations performed fails
+(returns a non-2xx HTTP status code), the transaction will be rolled back
+and all changes will be undone.</p><p>Each job description should contain a <code class="literal">to</code> attribute, with a value
+relative to the data API root (so <a class="ulink" href="http://localhost:7474/db/data/node" target="_top">http://localhost:7474/db/data/node</a> becomes
+just /node), and a <code class="literal">method</code> attribute containing HTTP verb to use.</p><p>Optionally you may provide a <code class="literal">body</code> attribute, and an <code class="literal">id</code> attribute to
+help you keep track of responses, although responses are guaranteed to be
+returned in the same order the job descriptions are received.</p><p>The following figure outlines the different parts of the job
+descriptions:</p><div class="informalfigure"><a class="ulink" href="images/batch-request-api.png" target="_top">
+<span class="inlinemediaobject"><img src="images/batch-request-api.png" alt="batch-request-api.png" /></span>
+</a></div><div class="figure"><a id="idp14816656"></a><p class="title"><strong>Figure 25.69. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Execute-multiple-operations-in-batch.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Execute-multiple-operations-in-batch.svg" alt="Final-Graph-Execute-multiple-operations-in-batch.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">POST</code></strong></span>  <code class="literal">http://localhost:7474/db/data/batch</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json; charset=UTF-8</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "method" : "PUT",
+  "to" : "/node/221/properties",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 0
+}, {
+  "method" : "GET",
+  "to" : "/node/221",
+  "id" : 1
+}, {
+  "method" : "POST",
+  "to" : "/node",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 2
+}, {
+  "method" : "POST",
+  "to" : "/node",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 3
+} ]</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json; charset=UTF-8</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "id" : 0,
+  "from" : "/node/221/properties"
+}, {
+  "id" : 1,
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/221/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/221/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/221/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/221/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/221",
+    "property" : "http://localhost:7474/db/data/node/221/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/221/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/221/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/221/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/221/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/221/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/221/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/221/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "from" : "/node/221"
+}, {
+  "id" : 2,
+  "location" : "http://localhost:7474/db/data/node/222",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/222/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/222/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/222/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/222/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/222",
+    "property" : "http://localhost:7474/db/data/node/222/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/222/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/222/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/222/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/222/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/222/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/222/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/222/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "from" : "/node"
+}, {
+  "id" : 3,
+  "location" : "http://localhost:7474/db/data/node/223",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/223/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/223/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/223/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/223/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/223",
+    "property" : "http://localhost:7474/db/data/node/223/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/223/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/223/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/223/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/223/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/223/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/223/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/223/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "from" : "/node"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-refer-to-items-created-earlier-in-the-same-batch-job"></a>25.16.2. Refer to items created earlier in the same batch job</h3></div></div></div><p>The batch operation API allows you to refer to the URI returned from a
+created resource in subsequent job descriptions, within the same batch
+call.</p><p>Use the <code class="literal">{[JOB ID]}</code> special syntax to inject URIs from created resources
+into JSON strings in subsequent job descriptions.</p><div class="figure"><a id="idp14846192"></a><p class="title"><strong>Figure 25.70. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-Refer-to-items-created-earlier-in-the-same-batch-job.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-Refer-to-items-created-earlier-in-the-same-batch-job.svg" alt="Final-Graph-Refer-to-items-created-earlier-in-the-same-batch-job.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">POST</code></strong></span>  <code class="literal">http://localhost:7474/db/data/batch</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json; charset=UTF-8</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "method" : "POST",
+  "to" : "/node",
+  "id" : 0,
+  "body" : {
+    "name" : "bob"
+  }
+}, {
+  "method" : "POST",
+  "to" : "/node",
+  "id" : 1,
+  "body" : {
+    "age" : 12
+  }
+}, {
+  "method" : "POST",
+  "to" : "{0}/relationships",
+  "id" : 3,
+  "body" : {
+    "to" : "{1}",
+    "data" : {
+      "since" : "2010"
+    },
+    "type" : "KNOWS"
+  }
+}, {
+  "method" : "POST",
+  "to" : "/index/relationship/my_rels",
+  "id" : 4,
+  "body" : {
+    "key" : "since",
+    "value" : "2010",
+    "uri" : "{3}"
+  }
+} ]</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json; charset=UTF-8</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "id" : 0,
+  "location" : "http://localhost:7474/db/data/node/214",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/214/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/214/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/214/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/214/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/214",
+    "property" : "http://localhost:7474/db/data/node/214/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/214/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/214/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/214/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/214/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/214/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/214/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/214/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "name" : "bob"
+    }
+  },
+  "from" : "/node"
+}, {
+  "id" : 1,
+  "location" : "http://localhost:7474/db/data/node/215",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/215/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/215/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/215/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/215/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/215",
+    "property" : "http://localhost:7474/db/data/node/215/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/215/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/215/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/215/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/215/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/215/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/215/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/215/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 12
+    }
+  },
+  "from" : "/node"
+}, {
+  "id" : 3,
+  "location" : "http://localhost:7474/db/data/relationship/120",
+  "body" : {
+    "extensions" : {
+    },
+    "start" : "http://localhost:7474/db/data/node/214",
+    "property" : "http://localhost:7474/db/data/relationship/120/properties/{key}",
+    "self" : "http://localhost:7474/db/data/relationship/120",
+    "properties" : "http://localhost:7474/db/data/relationship/120/properties",
+    "type" : "KNOWS",
+    "end" : "http://localhost:7474/db/data/node/215",
+    "data" : {
+      "since" : "2010"
+    }
+  },
+  "from" : "http://localhost:7474/db/data/node/214/relationships"
+}, {
+  "id" : 4,
+  "location" : "http://localhost:7474/db/data/index/relationship/my_rels/since/2010/120",
+  "body" : {
+    "extensions" : {
+    },
+    "start" : "http://localhost:7474/db/data/node/214",
+    "property" : "http://localhost:7474/db/data/relationship/120/properties/{key}",
+    "self" : "http://localhost:7474/db/data/relationship/120",
+    "properties" : "http://localhost:7474/db/data/relationship/120/properties",
+    "type" : "KNOWS",
+    "end" : "http://localhost:7474/db/data/node/215",
+    "data" : {
+      "since" : "2010"
+    },
+    "indexed" : "http://localhost:7474/db/data/index/relationship/my_rels/since/2010/120"
+  },
+  "from" : "/index/relationship/my_rels"
+} ]</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="rest-api-execute-multiple-operations-in-batch-streaming"></a>25.16.3. Execute multiple operations in batch streaming</h3></div></div></div><div class="figure"><a id="idp14874064"></a><p class="title"><strong>Figure 25.71. Final Graph</strong></p><div class="figure-contents"><a class="ulink" href="images/Final-Graph-execute-multiple-operations-in-batch-streaming.svg" target="_top">
+<span class="inlinemediaobject"><img src="images/Final-Graph-execute-multiple-operations-in-batch-streaming.svg" alt="Final-Graph-execute-multiple-operations-in-batch-streaming.svg" /></span>
+</a></div></div><br class="figure-break" /><p><span class="emphasis"><em>Example request</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">POST</code></strong></span>  <code class="literal">http://localhost:7474/db/data/batch</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Accept:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">X-Stream:</code></strong></span> <code class="literal">true</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "method" : "PUT",
+  "to" : "/node/33/properties",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 0
+}, {
+  "method" : "GET",
+  "to" : "/node/33",
+  "id" : 1
+}, {
+  "method" : "POST",
+  "to" : "/node",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 2
+}, {
+  "method" : "POST",
+  "to" : "/node",
+  "body" : {
+    "age" : 1
+  },
+  "id" : 3
+} ]</pre><p><span class="emphasis"><em>Example response</em></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<span class="strong"><strong><code class="literal">200:</code></strong></span> <code class="literal">OK</code>
+</li><li class="listitem">
+<span class="strong"><strong><code class="literal">Content-Type:</code></strong></span> <code class="literal">application/json; charset=UTF-8</code>
+</li></ul></div><pre class="programlisting brush: javascript">[ {
+  "id" : 0,
+  "from" : "/node/33/properties",
+  "body" : null,
+  "status" : 204
+}, {
+  "id" : 1,
+  "from" : "/node/33",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/33/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/33/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/33/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/33/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/33",
+    "property" : "http://localhost:7474/db/data/node/33/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/33/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/33/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/33/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/33/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/33/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/33/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/33/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "status" : 200
+}, {
+  "id" : 2,
+  "from" : "/node",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/34/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/34/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/34/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/34/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/34",
+    "property" : "http://localhost:7474/db/data/node/34/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/34/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/34/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/34/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/34/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/34/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/34/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/34/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "location" : "http://localhost:7474/db/data/node/34",
+  "status" : 201
+}, {
+  "id" : 3,
+  "from" : "/node",
+  "body" : {
+    "extensions" : {
+    },
+    "outgoing_relationships" : "http://localhost:7474/db/data/node/35/relationships/out",
+    "labels" : "http://localhost:7474/db/data/node/35/labels",
+    "all_typed_relationships" : "http://localhost:7474/db/data/node/35/relationships/all/{-list|&amp;|types}",
+    "traverse" : "http://localhost:7474/db/data/node/35/traverse/{returnType}",
+    "self" : "http://localhost:7474/db/data/node/35",
+    "property" : "http://localhost:7474/db/data/node/35/properties/{key}",
+    "properties" : "http://localhost:7474/db/data/node/35/properties",
+    "outgoing_typed_relationships" : "http://localhost:7474/db/data/node/35/relationships/out/{-list|&amp;|types}",
+    "incoming_relationships" : "http://localhost:7474/db/data/node/35/relationships/in",
+    "create_relationship" : "http://localhost:7474/db/data/node/35/relationships",
+    "paged_traverse" : "http://localhost:7474/db/data/node/35/paged/traverse/{returnType}{?pageSize,leaseTime}",
+    "all_relationships" : "http://localhost:7474/db/data/node/35/relationships/all",
+    "incoming_typed_relationships" : "http://localhost:7474/db/data/node/35/relationships/in/{-list|&amp;|types}",
+    "data" : {
+      "age" : 1
+    }
+  },
+  "location" : "http://localhost:7474/db/data/node/35",
+  "status" : 201
+} ]</pre></div></div><HR xmlns=""></HR><a xmlns="" href="ln-idp1064128.html"><p xmlns="http://www.w3.org/1999/xhtml" class="copyright">Copyright © 2013 Neo Technology</p></a><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="rest-api-graph-algos.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="rest-api.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="rest-api-indexes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

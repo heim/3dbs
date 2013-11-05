@@ -1,0 +1,83 @@
+nov 05, 2013 8:16:28 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+nov 05, 2013 8:16:30 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+nov 05, 2013 8:16:30 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 40 threads available
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: No SSL certificate found, generating a self-signed certificate..
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+nov 05, 2013 8:16:31 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+nov 05, 2013 8:16:31 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:16:32 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:16:32 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:16:33 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://localhost:7474/]
+nov 05, 2013 8:16:44 PM org.neo4j.server.logging.Logger log
+INFO: Neo4j Server shutdown initiated by request
+nov 05, 2013 8:17:22 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+nov 05, 2013 8:17:22 PM org.neo4j.server.logging.Logger log
+INFO: Failed to start Neo4j with an older data store version. To enable automatic upgrade, please set configuration parameter "allow_store_upgrade=true"
+nov 05, 2013 8:17:22 PM org.neo4j.server.logging.Logger log
+SEVERE: Failed to start Neo4j with an older data store version. To enable automatic upgrade, please set configuration parameter "allow_store_upgrade=true"
+nov 05, 2013 8:17:22 PM org.neo4j.server.logging.Logger log
+SEVERE: 
+org.neo4j.server.ServerStartupException: Starting Neo4j Server failed: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformUpgradeIfNecessary]: Failed to start Neo4j with an older data store version. To enable automatic upgrade, please set configuration parameter "allow_store_upgrade=true"
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:193)
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:87)
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:50)
+Caused by: org.neo4j.server.preflight.PreflightFailedException: Startup failed due to preflight task [class org.neo4j.server.preflight.PerformUpgradeIfNecessary]: Failed to start Neo4j with an older data store version. To enable automatic upgrade, please set configuration parameter "allow_store_upgrade=true"
+	at org.neo4j.server.AbstractNeoServer.runPreflightTasks(AbstractNeoServer.java:305)
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:135)
+	... 2 more
+
+nov 05, 2013 8:17:22 PM org.neo4j.server.logging.Logger log
+SEVERE: Failed to start Neo Server on port [7474]
+nov 05, 2013 8:18:37 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+nov 05, 2013 8:18:38 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 40 threads available
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+nov 05, 2013 8:18:39 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+nov 05, 2013 8:18:40 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+nov 05, 2013 8:18:40 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:18:40 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:18:40 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 8:18:41 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://localhost:7474/]
