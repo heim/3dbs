@@ -463,92 +463,95 @@ class: pushed
 class: cols three
 <h1><span>Praksis</span></h1>
 
-<div class="col">
-.circle.yellow.centered[Redis]
-<h1><span>Key-value</span></h1>
-
-* low-level api
+<div class="cols three">
+  <div class="col">
+  .circle.green.centered[MongoDB]
+  </div>
 --
-
-* data structure server
+  <div class="col">
+  .circle.yellow.centered[Redis]
+  </div>
 --
-
-* in-memory
---
-
-* eventually consistent
---
-
-* Relaxed consistency
---
-
+  <div class="col">
+  .circle.lightbrown.centered[neo4j]
+  </div>
 </div>
-<div class="col">
-.circle.green.centered[MongoDB]
-<h1><span>Dokumentdatabase</span></h1>
 --
-
-* ingen relasjoner
+<div class="cols three">
+  <div class="col">
+  # <span>Dokumentdatabase</span>
+  </div>
 --
-
-* embedded documents
+  <div class="col">
+  # <span> Key-value +++</span>
+  </div>
 --
-
-* skalerer meget godt horisontalt
---
-
-* ikke ACID p.g.a. ingen transaksjoner på tvers av dokumenter
---
-
-* eventually consistent 
---
-
-* write concerns
---
-
-* Strong consistency ved single-master-system
---
-
-* Reading from secondaries -> relaxed consistency
---
-</div>
-<div class="col">
-.circle.lightbrown.centered[neo4j]
-<h1><span>Grafdatabase</span></h1>
---
-
-* ACID
---
-
-* optimalisert for sammenkoblede data
---
-
-* eks. hvem følger hvem på twitter
---
-
-* Consistent, Available, men *ikke* distribuert
+  <div class="col">
+  # <span>Grafdatabase</span>
+  </div>
 </div>
 ???
 
-Redis: Relaxed consistency, mulig å konfigurere at den ikke tar imot writes med mindre N-slaver er koblet til.
 
-MongoDB: Replication. 
+# Mongo
+
+* ingen relasjoner
+* embedded documents
+* skalerer meget godt horisontalt
+* ikke ACID p.g.a. ingen transaksjoner på tvers av dokumenter
+* eventually consistent 
+* write concerns
+* Strong consistency ved single-master-system
+* Reading from secondaries -> relaxed consistency
+
+# Neo
+
+* ACID
+* optimalisert for sammenkoblede data
+* eks. hvem følger hvem på twitter
+* Consistent, Available, men *ikke* distribuert
+
+---
+name: Redis
+class: round
+
+![](img/redis.png)
+
+???
+
+# Redis
+
+* limet i webapplikasjonen
+* data structure server
+  * løser veldig mange normale problemer
+  * køer
+  * expiry
+  * caching
+  * ranking
+  * telling
+* in-memory så ikke durable
+* relaxed consistency ved distribuerte installasjoner
+* har et veldig lav-nivå api
+* mange forskjellige kommandoer som gjør èn ting og den tingen gjør de bra
 
 
 ---
-name: terminal
-# <span>Terminal</span>
+name: redis-term
+class: cols white
+# <span>Redis</span>
 
 
 <div id="redis-term"></div>
 
 <div style="clear: both"></div>
 
-<ul id="list"></ul>
+
+
+<ul id="redis-list"></ul>
 
 <p>
-  <a href="#" id="resume">Resume</a> navigation
-  <a href="#" id="ls">ls</a>
+  <a href="#" id="resume">Resume</a>
+  <a href="#" class="redis-cmd" data-command="foo">ls</a>
 </p>
 
 

@@ -104,25 +104,24 @@ io = io.listen(server, {
   log: false
 });
 
+redisClient.subscribe('realtime');
+
+redisClient.on('message', function(channel, message) {
+  console.log("message: " + message);
+  if(channel == 'realtime') {
+    socket.emit('redis', message);
+  }
+});
+
 io.sockets.on('connection', function(sock) {
   socket = sock;
   socket.on('redis-term', function(data) {
     redis_term.write(data);
   });
 
-  redisClient.subscribe('realtime');
-
-  redisClient.on('message', function(channel, message) {
-    console.log("got message " + message);
-    console.log("got channel " + channel);
-    if(channel == 'realtime') {
-      socket.emit('redis', message);
-    }
-  
-  });
 
   socket.on('disconnect', function() {
-    redisClient.unsubscribe();
+  //  redisClient.unsubscribe();
     socket = null;
   });
 
