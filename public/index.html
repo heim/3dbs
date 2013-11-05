@@ -600,6 +600,41 @@ photo: http://www.designboom.com/architecture/digital-architecture-laboratory-ag
 - Gå igjennom store mengder data og hente ut og bearbeide enkelte eller flere felter
 - Eksempel:
   - Nettbutikk: Hente ut en sortert liste over de produktkategoriene som flest produkter blir kjøpt i.
+  - Sosialt nettverk: Hvor mange nye medlemmer får vi pr. måned?
+
+---
+name: mongo-term
+class: cols two
+# <span>MongoDB</span>
+
+<div id="mongo-term"></div>
+<div style="clear: both"></div>
+
+
+<div class="col">
+  <h3><span>Query</span></h3>
+  <a href="#" class="mongo-cmd">db.zips.findOne()</a><br />
+  <a href="#" class="mongo-cmd">db.zips.find({state: "AL"})</a><br />
+  <a href="#" class="mongo-cmd">db.zips.find({state: "AL"}).count()</a><br />
+  <a href="#" class="mongo-cmd">db.zips.find({state: "AL" , pop: {$gt: 10000}}).count()</a><br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <a href="#" class='pushed' id="resume">Resume</a>
+</div>
+<div class="col">
+  <h3><span>Aggregation</span></h3>
+  <pre>
+    <a href="#" class="mongo-cmd">
+db.zips.aggregate( 
+{ $group :
+  { _id : "$state",
+  totalPop : { $sum : "$pop" } } },
+  { $match : {totalPop : { $gte : 10000000 } } } )</a><br />
+  </pre>
+</div>
 
 ---
 name: Redis

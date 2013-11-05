@@ -1,7 +1,3 @@
-/**
- * term.js
- * Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
- */
 
 var http = require('http')
   , express = require('express')
@@ -10,23 +6,17 @@ var http = require('http')
   , terminal = require('term.js')
   , redis = require('redis');
 
-/**
- * term.js
- */
 
 process.title = 'term.js';
-
-/**
- * Dump
- */
-
 
 /**
  * Open Terminal
  */
 
-var buff = []
+var redis_buff = []
+  , mongo_buff = []
   , socket
+  , mongo_term
   , redis_term;
 
 //term = pty.fork(process.env.SHELL || 'sh', [], {
@@ -40,16 +30,35 @@ redis_term = pty.fork("redis-cli" || 'sh', [], {
 });
 
 redis_term.on('data', function(data) {
-
   return !socket
-    ? buff.push(data)
+    ? redis_buff.push(data)
     : socket.emit('redis-term', data);
 });
 
+
+mongo_term = pty.fork("mongo" || 'sh', [], {
+  name: require('fs').existsSync('/usr/share/terminfo/x/xterm-256color')
+    ? 'xterm-256color'
+    : 'xterm',
+  cols: 80,
+  rows: 24,
+  cwd: process.env.HOME
+});
+
+mongo_term.on('data', function(data) {
+  return !socket
+    ? mongo_buff.push(data)
+    : socket.emit('mongo-term', data);
+});
+
 console.log(''
-  + 'Created shell with pty master/slave'
+  + 'Created redis-term with pty master/slave'
   + ' pair (master: %d, pid: %d)',
-  redis_term.fd, redis_term.pid);
+    redis_term.fd, redis_term.pid);
+console.log(''
+  + 'Created mongo-term with pty master/slave'
+  + ' pair (master: %d, pid: %d)',
+    mongo_term.fd, mongo_term.pid);
 
 /**
  * App & Server
@@ -119,13 +128,19 @@ io.sockets.on('connection', function(sock) {
     redis_term.write(data);
   });
 
+  socket.on('mongo-term', function(data) {
+    mongo_term.write(data);
+  });
 
   socket.on('disconnect', function() {
   //  redisClient.unsubscribe();
     socket = null;
   });
 
-  while (buff.length) {
-    socket.emit('redis-term', buff.shift());
+  while (mongo_buff.length) {
+    socket.emit('mongo-term', mongo_buff.shift());
+  }
+  while (redis_buff.length) {
+    socket.emit('redis-term', redis_buff.shift());
   }
 });
