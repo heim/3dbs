@@ -512,6 +512,96 @@ class: cols three
 * Consistent, Available, men *ikke* distribuert
 
 ---
+name: mongo
+class: middle center  white
+
+<img class="img">![](img/mongo.jpg)</img>
+
+???
+
+- MongoDB er en skjemaløs dokumentdatabase
+- Hva betyr skjemaløs?
+  - Jo, det betyr at i en hver tabell (eller collection) så kan man putte inn dokumenter (rader) med forskjellige felter.
+---
+class: white
+# <span>Dokumenter</span>    
+
+## En ordre
+<pre>
+  { 
+    order_id: 1,
+    customer_id: 1668,
+    order_lines: [
+      {product_id: 1, product_category: "Foo", quantity: 3},
+      {product_id: 2, product_category: "Bar", quantity: 2},
+      {product_id: 3, product_category: "Baz", quantity: 1}
+    ]
+  }
+</pre>
+
+## En annen ordre 
+
+<pre>
+  { 
+    order_id: 1,
+    order_lines: [
+      {product_id: 1, product_category: "Foo", quantity: 3},
+      {product_id: 2, product_category: "Bar", quantity: 2},
+      {product_id: 3, product_category: "Baz", quantity: 1}
+    ],
+    promotion_code: "ROWYCO",
+    company_id: 1337
+  }
+</pre>
+???
+- BSON - Binary JSON
+- Begge ligger i order collection
+- Kan ha forskjellige felter
+- Spm: Er det en god idè?
+- Spm: Er hele applikasjonen skjemaløs? 
+---
+class: pushed
+
+<span class="img">![](img/infinite.jpg)</span>
+
+# <span>Cool feature 1</span>
+
+## Infinite Scaleout
+
+
+photo: http://pics33.blogspot.no/2010/08/examples-of-droste-effect-images.html
+
+???
+
+- Skalerer meget bra.
+- Replica-sets for dataintegritet og sikkerhet
+- Sharding
+  - sprer data mellom flere sentre
+  - dataer spres på en "index"
+  - relaxed consistency
+  - High availability
+---
+class: pushed
+
+<span class="img">![](img/aggregate.jpg)</span>
+
+# <span>Cool feature 2</span>
+
+## Aggregation
+
+
+photo: http://www.designboom.com/architecture/digital-architecture-laboratory-aggregated-porosity/
+
+???
+
+- Aggregation-framework
+  - litt a'la map-reduce
+  - noen som vet hva det er?
+- Gå igjennom store mengder data og hente ut og bearbeide enkelte eller flere felter
+- Eksempel:
+  - Nettbutikk: Hente ut en sortert liste over de produktkategoriene som flest produkter blir kjøpt i.
+
+---
 name: Redis
 class: round
 
@@ -541,6 +631,7 @@ class: cols three white
 # <span>Redis</span>
 
 <div id="redis-term"></div>
+<ul id="redis-list" style="position: relative; left: 3em"></ul>
 <div style="clear: both"></div>
 
 
@@ -556,6 +647,10 @@ class: cols three white
   <a href="#" class="redis-cmd">lpop protagonists</a><br />
   <a href="#" class="redis-cmd">rpoplpush protagonists antagonists</a><br />
   <a href="#" class="redis-cmd">lrange antagonists 0 -1</a><br />
+  <br />
+  <br />
+  <br />
+<a href="#" class='pushed' id="resume">Resume</a>
 </div>
 <div class="col">
   <h3><span>Set</span></h3>
@@ -569,12 +664,17 @@ class: cols three white
   <a href="#" class="redis-cmd">sunionstore characters prot ant</a><br />
   <a href="#" class="redis-cmd">smembers characters</a><br />
 </div>
-
 <div class="col">
-  <ul id="redis-list"></ul>
+  <h3><span>Sorted sets</span></h3>
+  <a href="#" class="redis-cmd">zadd players 10 franklin</a><br />
+  <a href="#" class="redis-cmd">zadd players 15 trevor</a><br />
+  <a href="#" class="redis-cmd">zadd players 20 michael</a><br />
+  <a href="#" class="redis-cmd">zrevrank players michael</a><br />
+  <a href="#" class="redis-cmd">zincrby players 6 trevor</a><br />
+  <a href="#" class="redis-cmd">zrevrange players 0 -1</a><br />
+
 </div>
 
-<a href="#" class='pushed' id="resume">Resume</a>
 
 
 
