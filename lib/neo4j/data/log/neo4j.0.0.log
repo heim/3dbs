@@ -81,3 +81,35 @@ nov 05, 2013 8:18:40 PM com.sun.jersey.server.impl.application.WebApplicationImp
 INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
 nov 05, 2013 8:18:41 PM org.neo4j.server.logging.Logger log
 INFO: Remote interface ready and available at [http://localhost:7474/]
+nov 05, 2013 9:58:14 PM org.neo4j.server.logging.Logger log
+INFO: Neo4j Server shutdown initiated by request
+nov 05, 2013 9:58:22 PM org.neo4j.server.logging.Logger log
+INFO: Setting startup timeout to: 120000ms based on -1
+nov 05, 2013 9:58:23 PM org.neo4j.server.logging.Logger log
+INFO: Successfully started database
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Starting HTTP on port :7474 with 40 threads available
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Enabling HTTPS on port :7473
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Mounted discovery module at [/]
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Mounted REST API at [/db/data/]
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Mounted management API at [/db/manage/]
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Mounted webadmin at [/webadmin]
+nov 05, 2013 9:58:24 PM org.neo4j.server.logging.Logger log
+INFO: Mounted Neo4j Browser at [/browser]
+nov 05, 2013 9:58:25 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/webadmin] from [webadmin-html]
+nov 05, 2013 9:58:25 PM org.neo4j.server.logging.Logger log
+INFO: Mounting static content at [/browser] from [browser]
+nov 05, 2013 9:58:25 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 9:58:25 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 9:58:26 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
+INFO: Initiating Jersey application, version 'Jersey: 1.9 09/02/2011 11:17 AM'
+nov 05, 2013 9:58:26 PM org.neo4j.server.logging.Logger log
+INFO: Remote interface ready and available at [http://localhost:7474/]

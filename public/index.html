@@ -469,11 +469,11 @@ class: cols three
   </div>
 --
   <div class="col">
-  .circle.yellow.centered[Redis]
+  .circle.lightbrown.centered[neo4j]
   </div>
 --
   <div class="col">
-  .circle.lightbrown.centered[neo4j]
+  .circle.yellow.centered[Redis]
   </div>
 </div>
 --
@@ -483,11 +483,11 @@ class: cols three
   </div>
 --
   <div class="col">
-  # <span> Key-value +++</span>
+  # <span>Grafdatabase</span>
   </div>
 --
   <div class="col">
-  # <span>Grafdatabase</span>
+  # <span> Key-value +++</span>
   </div>
 </div>
 ???
@@ -519,6 +519,8 @@ class: middle center  white
 
 ???
 
+- Mongo er en dokumentdatabase
+- Hva er en dokumentdatabase
 - MongoDB er en skjemaløs dokumentdatabase
 - Hva betyr skjemaløs?
   - Jo, det betyr at i en hver tabell (eller collection) så kan man putte inn dokumenter (rader) med forskjellige felter.
@@ -626,20 +628,21 @@ class: cols two
 </div>
 <div class="col">
   <h3><span>Aggregation</span></h3>
-  <pre>
-    <a href="#" class="mongo-cmd">
-db.zips.aggregate( 
-{ $group :
-  { _id : "$state",
-  totalPop : { $sum : "$pop" } } },
-  { $match : {totalPop : { $gte : 10000000 } } } )</a><br />
-  </pre>
+    <a href="#" class="mongo-cmd">db.zips.aggregate( { $group : { _id : "$state", totalPop : { $sum : "$pop" } } }, { $match : {totalPop : { $gte : 10000000 } } } )</a><br />
+</div>
+---
+class: pushed white
+<span class="img">![](img/neo.png)</span>
+
+# <span>From sweden with love</span>
+<div>
+ <a href="//localhost:7474/browser/" target="_blank">localhost:7474/browser</a>
 </div>
 ---
 name: graph
-class: round
+class: round white
 
-et bilde av noen grafer (kanskje neo-video)
+![](img/graph.png)
 
 ???
 hva er grafdatabaser
@@ -652,10 +655,13 @@ Genealogy
 Time series data
 Product catalogue
 Web analytics
-Scientific computing (especially bioinformatics)
-Indexing your slow RDBMS
-And much more!
 
+- Tegn på tavla:
+  - GBG -tog- Oslo (tar fire timer)
+  - Oslo
+    - By
+    Amundsen - er i - Oslo
+    - Andreas - liker - amundsen 
 ---
 name: Redis
 class: round
@@ -727,6 +733,7 @@ class: cols three white
   <a href="#" class="redis-cmd">zrevrank players michael</a><br />
   <a href="#" class="redis-cmd">zincrby players 6 trevor</a><br />
   <a href="#" class="redis-cmd">zrevrange players 0 -1</a><br />
+  <a href="#" class="redis-cmd">zrevrange players 0 -1 WITHSCORES</a><br />
 
 </div>
 

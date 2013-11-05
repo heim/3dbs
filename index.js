@@ -4,6 +4,8 @@ var http = require('http')
   , io = require('socket.io')
   , pty = require('pty.js')
   , terminal = require('term.js')
+  , neo4j = require('neo4j')
+  , _ = require('underscore')
   , redis = require('redis');
 
 
@@ -105,14 +107,6 @@ server.on('connection', function(socket) {
 const redisClient = redis.createClient();
 console.log('info', 'connected to redis server');
 
-/**
- * Sockets
- */
-
-io = io.listen(server, {
-  log: false
-});
-
 redisClient.subscribe('realtime');
 
 redisClient.on('message', function(channel, message) {
@@ -120,6 +114,27 @@ redisClient.on('message', function(channel, message) {
   if(channel == 'realtime') {
     socket.emit('redis', message);
   }
+});
+
+/*
+ * neo4j
+ */
+
+//var graphdb = new neo4j.GraphDatabase('http://localhost:7474');
+//
+//var query = 'match (char)-[:APPEARED_IN]-(episode) where char.character = "Madame Vastra"  return char,episode';
+//graphdb.query(query, {}, function(err, results) {
+//  _.each(results, console.log);
+//});
+
+
+
+/**
+ * Sockets
+ */
+
+io = io.listen(server, {
+  log: false
 });
 
 io.sockets.on('connection', function(sock) {
