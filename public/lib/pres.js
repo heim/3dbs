@@ -6,10 +6,10 @@ slideshow.on('showSlide', function(slide) {
   }
 });
 
-document.getElementById('resume').onclick = function (e) {
+$('.resume').click(function (e) {
   slideshow.resume();
   e.preventDefault();
-};
+});
 
 
 window.onload = function() {

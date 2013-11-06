@@ -1449,3 +1449,9 @@ Storage files: (filename : modification date - size)
 2013-11-05 20:58:24.994+0000 INFO  [o.n.k.i.DiagnosticsManager]: Mounted Neo4j Browser at: /browser
 2013-11-05 20:58:26.817+0000 INFO  [o.n.k.i.DiagnosticsManager]: Server started on: http://localhost:7474/
 2013-11-05 20:58:26.818+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- SERVER STARTED END ---
+2013-11-06 06:01:04.317+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 27534868ms [total block time: 27534.867s]
+2013-11-06 06:01:30.935+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 226ms [total block time: 27535.094s]
+2013-11-06 08:53:15.038+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 1415014ms [total block time: 28950.107s]
+2013-11-06 08:58:00.062+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 38944ms [total block time: 28989.053s]
+2013-11-06 09:13:07.094+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 854651ms [total block time: 29843.703s]
+2013-11-06 09:18:16.036+0000 WARN  [o.n.k.EmbeddedGraphDatabase]: GC Monitor: Application threads blocked for an additional 271266ms [total block time: 30114.969s]
