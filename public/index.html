@@ -18,11 +18,11 @@
     <textarea id="source">
 class: front-page
 
-# 3 Databases in (approx.) 33 minutes
+# 3 databaser på (ca.) 3x7 minutter
 
 ## En kjapp innføring i NoSQL
 
-Date-IT, Chalmers 6/11 - 2013
+Miniseminaret, NTNU 16/9-2014
 
 Andreas Heim
 BEKK Consulting
@@ -37,7 +37,6 @@ BEKK Consulting
 ## Databaseteori for distribuerte systemer
 * ACID
 * BASE
-* CAP
 
 ## Praksis (yeah)
 * MongoDB
@@ -48,7 +47,7 @@ BEKK Consulting
 
 - Vi skal snakke litt om både teori og praksis
 - Først noen akronymer som beskriver distribuerte databaser og systemer
-  - ACID, BASE, CAP
+  - ACID, BASE
 - Så skal vi se litt nærmere på tre typer databaser
 - Disse er veleldig forskjellige, men faller alle inn under samlebetegnelsen NoSQL
 - MongoDB som er en dokumentdatabase
@@ -105,10 +104,8 @@ class: middle
 .circle.centered.red[ATOMICITY]
 
 ???
-- Atomicity er en av egenskapene ved transaksjoner.
 - I en serie av databaseoperasjoner så må enten *alle* skje, eller *ingenting* skjer.
 - En database som garanterer atomicity vil *motvirke* at en oppdatering til databasen kun vil gjennomføres delvis.
-- Atomicity i denne forstanden kan defineres som at oppdateringen ikke kan verken deles eller forenkles.
 - En feilende transaksjon vil føre til at databasen *rulles tilbake* til sin opprinnelige tilstand.
 ---
 class: middle 
@@ -125,7 +122,6 @@ class: middle
 ???
 - Egenskapen *isolation* sørger for at alle transaksjoner skjer isolert og på samme måte som om de skulle vært kjørt i parallel.
 - Dette kan gjøres ved at databasen låser de aktuelle feltene under en transaksjon slik at andre transaksjoner ikke kan oppdatere eller lese fra samme rader i databasen.
-- Her finnes det også forskjellige nivåer av isolasjon. 
 - En tommelfingerregel er at jo høyere grad av isolasjon man har, desto mindre kan databasen yte.
 - Lav isolasjon er lik høy concurrency
 ---
@@ -137,8 +133,6 @@ class: middle
 
 - Durability, eller holdbarhet på norsk sørger for at dataene blir tatt vare på selv om systemet kræsjer. 
 - Typisk in-memory databaser har lav durablity, imens clustrede installasjoner har høy durability.
-- Sammenhenger også mye med hardware og operativsystem.
-- Databaser som har høy kapasitet på skriv-operasjoner må gjerne ofre litt durability siden man ofte ikke får en bekreftelse på at skriveoperasjonen har vært suksessfull
 ---
 class: middle center
 
@@ -276,251 +270,6 @@ class: cols three
   - ut 20 kr
   - ut 20 kr på en cola
 ---
-class: white middle center
-
-# CAP THEOREM
-
-???
-- Consistency (ACID)
-- Availability (redundans)
-- Partition tolerance (skalering)
-
----
-class: white middle
-
-.circle.centered.red[CONSISTENCY]
-???
-- Alle noder ser de samme dataene hele tiden.
-- Hvis man skriver til en node og leser fra en annen rett etterpå, er dataene konsistente med en gang?
-- Eventual consistency er noe man snakker mye om i NoSQL-sammenheng. Dataene vil bli spredt til alle noder "etterhvert".
----
-class: white middle
-.circle.centered.green[AVAILABILITY]
-???
-- Hva skjer hvis en node i clusteret går ned? Kan man fortsatt lese fra clusteret?
----
-class: cols three middle
-<div class="col">
-  .circle.lightbrown.centered[PARTITION]
-</div>
-<div class="col">
-  &nbsp;
-</div>
-<div class="col">
-  .circle.yellow.centered[TOLERANCE]
-</div>
-???
-- Hva skjer når to noder i clusteret ikke kan snakke sammen lenger?
-- (Nettverksbrudd)
----
-class: cols three
-<h1><span>Velg to</span></h1>
-<div class="col">
-.circle.green.centered[CP]
-<h1><span>Enforced consistency</span></h1>
-</div>
-<div class="col">
-  &nbsp;
-</div>
-<div class="col">
-  &nbsp;
-</div>
----
-class: cols three
-<h1><span>Velg to</span></h1>
-
-<div class="col">
-  .circle.green.centered[CP]
-  <h1><span>Enforced consistency</span></h1>
-
-  - alltid konsistent
-  - ACID-databaser *må* velge dette.
-</div>
-<div class="col">
-  &nbsp;
-</div>
-<div class="col">
-  &nbsp;
-</div>
----
-class: cols three
-
-<h1><span>Velg to</span></h1>
-
-<div class="col">
-  .circle.green.centered[CP]
-  <h1><span>Enforced consistency</span></h1>
-
-  - alltid konsistent
-  - ACID-databaser *må* velge dette.
-</div>
-
-<div class="col">
-  .circle.red.centered[AP]
-  <h1><span>Eventual consistency</span></h1>
-</div>
-
-<div class="col">
-  &nbsp;
-</div>
----
-class: cols three
-
-<h1><span>Velg to</span></h1>
-
-<div class="col">
-  .circle.green.centered[CP]
-  <h1><span>Enforced consistency</span></h1>
-
-  - alltid konsistent
-  - ACID-databaser *må* velge dette.
-</div>
-
-<div class="col">
-  .circle.red.centered[AP]
-  <h1><span>Eventual consistency</span></h1>
-
-  - tilgjengelig over konsistent
-  - typisk for BASE
-</div>
-
-<div class="col">
-  &nbsp;
-</div>
----
-class: cols three
-
-<h1><span>Velg to</span></h1>
-
-<div class="col">
-  .circle.green.centered[CP]
-  <h1><span>Enforced consistency</span></h1>
-
-  - alltid konsistent
-  - ACID-databaser *må* velge dette.
-</div>
-
-<div class="col">
-  .circle.red.centered[AP]
-  <h1><span>Eventual consistency</span></h1>
-
-  - tilgjengelig over konsistent
-  - typisk for BASE
-</div>
-
-<div class="col">
-  .circle.yellow.centered[CA]
-  <h1><span>Consistently available</span></h1>
-</div>
----
-class: cols three
-
-<h1><span>Velg to</span></h1>
-
-<div class="col">
-  .circle.green.centered[CP]
-  <h1><span>Enforced consistency</span></h1>
-
-  - alltid konsistent
-  - ACID-databaser *må* velge dette.
-</div>
-
-<div class="col">
-  .circle.red.centered[AP]
-  <h1><span>Eventual consistency</span></h1>
-
-  - tilgjengelig over konsistent
-  - typisk for BASE
-</div>
-
-<div class="col">
-  .circle.yellow.centered[CA]
-  <h1><span>Consistently available</span></h1>
-
-  - alltid tilgjengelig?
-  - alltid konsistent?
-</div>
----
-class: round
-<span class="img">
-![](img/think.png)
-</span>
-???
-
-Hvis vi har et distribuert system:
-- klienter skriver til forskjellige deler av clusteret
-- clusteret blir partisjonert pga en nettverksfeil
-- klientene fortsetter å skrive til hver sin del
-- hvordan sammenstiller man data??
-- git merge?
-- hva med konflikter?
-
----
-
-class: cols two
-
-# <span>Velg èn</span>
-
-<div class="col">
-  .circle.red.centered[CONSISTENCY]
-  # <span>Mer konsistent</span>
-</div>
-
-<div class="col">
-  .circle.green.centered[AVAILABILITY]
-  # <span>Mer tilgjengelig</span>
-</div>
-???
-
-- Vi må velge enten mer konsistens eller mer tilgjengelighet
-- Det går ikke å ha maksimalt med tilgjengelighet eller konistens!
-
----
-class: cols two
-
-# <span>Velg èn</span>
-
-<div class="col">
-  .circle.red.centered[CONSISTENCY]
-  # <span>Mer konsistent</span>
-
-  - Transaksjon ikke godkjent før alle noder har mottatt data
-  - Alle noder får samme data
-</div>
-
-<div class="col">
-  .circle.green.centered[AVAILABILITY]
-  # <span>Mer tilgjengelig</span>
-</div>
-
----
-class: cols two
-
-# <span>Velg èn</span>
-
-<div class="col">
-  .circle.red.centered[CONSISTENCY]
-  # <span>Mer konsistent</span>
-
-  - Transaksjon ikke godkjent før alle noder har mottatt data
-  - Alle noder får samme data
-</div>
-
-<div class="col">
-  .circle.green.centered[AVAILABILITY]
-  # <span>Mer tilgjengelig</span>
-
-  - Synkronisering mellom noder
-  - To klienter kan få forskjellige data samtidig
-</div>
-???
-
-- 100% konsistente data krever total stopp ved nettverksbrudd
-- 100% oppetid (availability) fører med seg inkonsistens!
-- Men, det finnes grader av begge egenskaper.
-- F.eks. hvor kommer latency inn, hvor lenge er systemene partisjonert?
-
----
 class: pushed
 <span class="img">
 ![](img/hands.png)
@@ -570,7 +319,6 @@ class: cols three
 * skalerer meget godt horisontalt
 * ikke ACID p.g.a. ingen transaksjoner på tvers av dokumenter
 * eventually consistent 
-* write concerns
 * Strong consistency ved single-master-system
 * Reading from secondaries -> relaxed consistency
 
@@ -601,105 +349,9 @@ class: middle center  white
 - MongoDB er en skjemaløs dokumentdatabase
 - Hva betyr skjemaløs?
   - Jo, det betyr at i en hver tabell (eller collection) så kan man putte inn dokumenter (rader) med forskjellige felter.
----
-class: white
-# <span>Dokumenter</span>    
-
-## En ordre
-<pre>
-  { 
-    order_id: 1,
-    customer_id: 1668,
-    order_lines: [
-      {product_id: 1, product_category: "Foo", quantity: 3},
-      {product_id: 2, product_category: "Bar", quantity: 2},
-      {product_id: 3, product_category: "Baz", quantity: 1}
-    ]
-  }
-</pre>
-
-## En annen ordre 
-
-<pre>
-  { 
-    order_id: 1,
-    order_lines: [
-      {product_id: 1, product_category: "Foo", quantity: 3},
-      {product_id: 2, product_category: "Bar", quantity: 2},
-      {product_id: 3, product_category: "Baz", quantity: 1}
-    ],
-    promotion_code: "ROWYCO",
-    company_id: 1337
-  }
-</pre>
-???
-- BSON - Binary JSON
-- Begge ligger i order collection
-- Kan ha forskjellige felter
-- Spm: Er det en god idè?
-- Spm: Er hele applikasjonen skjemaløs? 
----
-class: pushed
-
-<span class="img">![](img/infinite.jpg)</span>
-
-# <span>Cool feature 1</span>
-
-## Infinite Scaleout
-
-
-photo: http://pics33.blogspot.no/2010/08/examples-of-droste-effect-images.html
-
-???
-
-- Skalerer meget bra.
-- Replica-sets for dataintegritet og sikkerhet
-- Sharding
-  - sprer data mellom flere sentre
-  - dataer spres på en "index"
-  - relaxed consistency
-  - High availability
----
-class: pushed
-
-<span class="img">![](img/aggregate.jpg)</span>
-
-# <span>Cool feature 2</span>
-
-## Aggregation
-
-
-photo: http://www.designboom.com/architecture/digital-architecture-laboratory-aggregated-porosity/
-
-???
-
-- Aggregation-framework
-  - litt a'la map-reduce
-  - noen som vet hva det er?
-- Gå igjennom store mengder data og hente ut og bearbeide enkelte eller flere felter
-- Eksempel:
-  - Nettbutikk: Hente ut en sortert liste over de produktkategoriene som flest produkter blir kjøpt i.
-  - Sosialt nettverk: Hvor mange nye medlemmer får vi pr. måned?
-
----
-# <span>Aggregation framework</span>
-
-## cat users.txt | sort | uniq -c | sort -nr | head -n 10
-
-
-<pre>
-db.users.aggregate(
-  {$group: 
-    {_id: "username", count: {$sum: 1}}
-    }, 
-  {$sort: {"count": -1}}, 
-  {$limit: 10}
-);
-</pre>
-
-???
 
 # SWITCH UT AV PRESENTER MODE!
+
 ---
 name: mongo-term
 class: cols two
@@ -711,20 +363,22 @@ class: cols two
 
 <div class="col">
   <h3><span>Query</span></h3>
-  <a href="#" class="mongo-cmd">db.zips.findOne()</a><br />
-  <a href="#" class="mongo-cmd">db.zips.find({state: "AL"})</a><br />
-  <a href="#" class="mongo-cmd">db.zips.find({state: "AL"}).count()</a><br />
-  <a href="#" class="mongo-cmd">db.zips.find({state: "AL" , pop: {$gt: 10000}}).count()</a><br />
+  <a href="#" class="mongo-cmd">use ntnu</a><br />
+  <a href="#" class="mongo-cmd">db.students.insert({name: "Kåre"})</a><br />
+  <a href="#" class="mongo-cmd">db.students.insert({name: "Per", linje: "data"})</a><br />
+  <a href="#" class="mongo-cmd">db.students.insert({name: "Preben", linje: "Ind.øk"})</a><br />
+  <a href="#" class="mongo-cmd">db.students.find({linje: {$exists: true}})</a><br />
+  <a href="#" class="mongo-cmd">db.students.find({linje: {$exists: false}})</a><br />
   <br />
-  <br />
-  <br />
-  <br />
-  <br />
+  <a href="#" class="mongo-cmd">db.students.drop()</a><br />
   <a href="#" class="resume">Resume</a>
 </div>
 <div class="col">
-  <h3><span>Aggregation</span></h3>
-    <a href="#" class="mongo-cmd">db.zips.aggregate( { $group : { _id : "$state", totalPop : { $sum : "$pop" } } }, { $match : {totalPop : { $gte : 10000000 } } } )</a><br />
+  <h3><span>&nbsp;</span></h3>
+  <a href="#" class="mongo-cmd">db.students.insert({random: "potet"})</a><br />
+  <a href="#" class="mongo-cmd">db.students.find({random: "potet"})</a><br />
+  <a href="#" class="mongo-cmd">db.students.update({random: "potet"}, {$inc: {potetcount: 3}})</a><br />
+
 </div>
 ---
 class: pushed white
@@ -840,33 +494,10 @@ class: cols three white
 
 
 ---
-class: center pushed
+class: front-page
 
 
-![ux](img/ux.png)
 
-### *.lightbrown[CAFE BULTEN]*
-## I KVELD KL. 17.00
-### *.lightbrown[uxcup.bekk.no]*
-
-???
-
-UX Cup er en interaksjonsdesign konkurranse for 3.-5. klassinger som vi arrangerer for 7 skoler i 3 byer. Vinnerlaget blir med BEKK til Lisboa på UXLx konferansen. Chalmers har vunnet de siste 2 årene, klarer de å forsvare seieren?
-
----
-class: pushed
-<span class="img">
-![](img/resepsjon.png)
-</span>
-
-
-<h1><span>Sommerjobb i BEKK</span></h1>
-
-.circle.yellow.top-right[Søknadsfrist 8. november]
-
-##Send søknad med CV og karakterer (betyg) til jobb@bekk.no.
-
-*.lightbrown[P.S. Vi skjønner svensk]*
 </textarea>
 
     <script src="/socket.io/socket.io.js"></script>

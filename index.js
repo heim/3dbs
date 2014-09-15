@@ -7,6 +7,8 @@ var http = require('http')
   , neo4j = require('neo4j')
   , _ = require('underscore')
   , redis = require('redis');
+var exec = require('child_process').exec;
+
 
 
 process.title = 'term.js';
@@ -128,6 +130,7 @@ redisClient.on('message', function(channel, message) {
 //});
 
 
+exec("open http://localhost:3000");
 
 /**
  * Sockets
